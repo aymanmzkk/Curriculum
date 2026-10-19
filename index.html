@@ -1,186 +1,366 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ayman Mouzakki - CV</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayman Mouzakki · CV · Desarrollador web y estudiante de DAM</title>
+  <meta name="description" content="CV de Ayman Mouzakki, desarrollador web y estudiante de 2º de DAM en Valencia. Python, Flask, PHP, Laravel y MySQL. Busco prácticas de formación en empresa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1b2430;
+      --muted: #5b6675;
+      --line: #e3e7ec;
+      --accent: #0b6e8a;
+      --accent-soft: #e6f2f5;
+      --side: #f4f6f8;
+      --page: #e9edf1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--page);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Barra superior (solo pantalla) */
+    .toolbar {
+      max-width: 900px;
+      margin: 24px auto 12px;
+      padding: 0 16px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { background: #fff; }
+    .btn:hover { text-decoration: none; filter: brightness(0.95); }
+
+    /* Hoja */
+    .cv {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      box-shadow: 0 2px 16px rgba(27, 36, 48, 0.08);
+    }
+
+    /* Columna lateral */
+    .side {
+      background: var(--side);
+      padding: 32px 24px;
+    }
+    .photo {
+      display: block;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px var(--line);
+    }
+    .side h2 {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 22px 0 8px;
+    }
+    .side ul { list-style: none; }
+    .side li { margin-bottom: 6px; }
+    .contact li { word-break: break-word; }
+    .contact span { display: block; font-size: 11px; color: var(--muted); }
+    .skill-group { margin-bottom: 10px; }
+    .skill-group strong { display: block; font-size: 12px; margin-bottom: 4px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-size: 11.5px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 7px;
+    }
+    .lang { display: flex; justify-content: space-between; gap: 8px; }
+    .lang em { font-style: normal; color: var(--muted); font-size: 12px; text-align: right; }
+
+    /* Columna principal */
+    .main { padding: 32px 36px; }
+    .main header h1 { font-size: 30px; line-height: 1.15; letter-spacing: -0.01em; }
+    .main header .role { font-size: 15px; color: var(--accent); font-weight: 600; margin-top: 4px; }
+    .main header .status {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .main h2 {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 4px;
+      margin: 22px 0 10px;
+    }
+    .profile { color: #2e3946; }
+
+    .item { margin-bottom: 12px; }
+    .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .item-head h3 { font-size: 14.5px; }
+    .item-head .date { font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .item .where { font-size: 13px; color: var(--muted); }
+    .item ul { margin: 4px 0 0 18px; }
+    .item li { margin-bottom: 2px; }
+    .stack { font-size: 12px; color: var(--accent); font-weight: 500; }
+    .badge {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0 5px;
+      margin-left: 6px;
+      vertical-align: 2px;
+    }
+
+    /* Móvil */
+    @media screen and (max-width: 760px) {
+      .toolbar { justify-content: center; }
+      .cv { grid-template-columns: minmax(0, 1fr); margin: 0 0 24px; box-shadow: none; }
+      .item-head h3 { overflow-wrap: anywhere; }
+      .side { order: 2; padding: 24px 16px; }
+      .main { order: 1; padding: 24px 16px; }
+      .main header { text-align: center; }
+      .main header .photo-mobile { display: block; }
+      .side .photo { display: none; }
+      .item-head { flex-direction: column; gap: 0; }
+    }
+    .photo-mobile { display: none; width: 104px; height: 104px; margin-bottom: 14px; }
+
+    /* Impresión / PDF: una página A4 */
+    @page { size: A4; margin: 0; }
+    @media print {
+      body { background: #fff; font-size: 10.5px; line-height: 1.4; }
+      .toolbar { display: none; }
+      .cv {
+        max-width: none;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        box-shadow: none;
+        grid-template-columns: 62mm 1fr;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .side { padding: 10mm 6mm 8mm 7mm; }
+      .main { padding: 10mm 9mm 8mm 8mm; }
+      .photo { width: 30mm; height: 30mm; margin-bottom: 4mm; }
+      .side h2 { font-size: 8.5px; margin: 4.5mm 0 1.8mm; }
+      .side li { margin-bottom: 1.2mm; }
+      .contact span { font-size: 8px; }
+      .skill-group { margin-bottom: 2mm; }
+      .skill-group strong { font-size: 9.5px; margin-bottom: 1mm; }
+      .tag { font-size: 8.8px; padding: 0 4px; }
+      .lang em { font-size: 9px; }
+      .main header h1 { font-size: 23px; }
+      .main header .role { font-size: 12px; }
+      .main header .status { font-size: 9.5px; margin-top: 2mm; padding: 1px 8px; }
+      .main h2 { font-size: 9.5px; margin: 4.5mm 0 2mm; }
+      .item { margin-bottom: 2.6mm; break-inside: avoid; }
+      .item-head h3 { font-size: 11px; }
+      .item-head .date { font-size: 9px; }
+      .item .where { font-size: 9.8px; }
+      .stack { font-size: 9px; }
+      .badge { font-size: 8px; }
+      a { color: var(--ink); }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="foto-cv.jfif" alt="Profile Picture" class="profile-pic">
-      <h1>Ayman Mouzakki</h1>
-      <h2>Desarollador Web | Diseñador Web | Microsoft Office </h2>
-      <p>Email: <a href="mailto:aymanmouzakki17@gmail.com">aymanmouzakki17@gmail.com</a> | Phone: +32 674121613 | 
-    <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: white;
-  color: saddlebrown; 
-  line-height: 1.6;
-}
+  <nav class="toolbar" aria-label="Acciones">
+    <a class="btn btn-ghost" href="https://aymanmzkk.github.io/Portafolio/">Ver portafolio</a>
+    <a class="btn btn-primary" href="cv-ayman-mouzakki.pdf" download>Descargar PDF</a>
+  </nav>
 
-.container {
-  max-width: 900px;
-  margin: 40px auto;
-  background: BlanchedAlmond; 
-  padding: 40px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border-radius: 10px;
-  border: 2px solid BurlyWood; 
-}
+  <main class="cv">
 
-header {
-  text-align: center;
-  border-bottom: 2px solid Peru;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-  background-color: BurlyWood;
-  border-radius: 8px 8px 0 0;
-  padding-top: 20px;
-  color: white;
-}
+    <aside class="side">
+      <img class="photo" src="foto.jpg" alt="Foto de Ayman Mouzakki">
 
-.profile-pic {
-  width: 175px;
-  height: 175px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-  border: 4px solid wheat;
-}
-
-h1 {
-  font-size: 2rem;
-  color: white;
-}
-
-h2 {
-  color: floralwhite;
-  font-weight: normal;
-  font-size: 1.2rem;
-}
-
-a {
-  color: sienna;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-section {
-  margin-bottom: 25px;
-  background-color: cornsilk;
-  padding: 20px;
-  border-radius: 8px;
-  border-left: 5px solid BurlyWood;
-}
-
-h3 {
-  color: sienna;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style: square inside;
-  padding-left: 10px;
-}
-
-.job {
-  margin-bottom: 15px;
-}
-
-.job h4 {
-  font-size: 1.1rem;
-  color: peru;
-}
-
-.job .date {
-  font-size: 0.9rem;
-  color: rosybrown;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: saddlebrown;
-  border-top: 1px solid BurlyWood;
-  padding-top: 10px;
-  background-color: BurlyWood;
-  border-radius: 0 0 8px 8px;
-  margin-top: 20px;
-  color: floralwhite;
-}
-</style>
-
-
-    </header>
-
-    <section class="acerca-de-mi">
-      <h3>ACERCA DE MÍ</h3>
-      <p>Soy una persona proactiva, responsable y orientada a resultados, con experiencia en informática. Me apasiona aprender continuamente y afrontar nuevos desafíos que me permitan crecer profesionalmente. Busco contribuir con mis habilidades y conocimientos en un entorno dinámico y colaborativo.</p>
-    </section>
-
-    <section class="educacion">
-      <h3>Educación</h3>
-      <p><strong>Formación profesional en Desarrollo de Aplicaciones Multiplataforma: Cursando</strong><br> Grado Superior CEAC-Valencia</p>
-      <p><strong>1 año universitario en MIAGE: 2022-2023</strong><br> Universidad internacional de Casablanca</p>
-      <p><strong>Bachillerato Física y Química: 2021-2022</strong><br> Escuela CASAHILLS de Casablanca</p>
-    </section>
-    
-    <section class="idiomas">
-      <h3>Idiomas</h3>
-      <ul>
-        <li>Darija: Lengua materna</li>
-        <li>Árabe: Lengua materna</li>
-        <li>Español: B2 (Taronja-Valencia)</li>
-        <li>Francés:  C1 (IFCAD-Bruselas)</li>
-        <li>Inglés:  C1 (Sin Certificar)</li>
+      <h2>Contacto</h2>
+      <ul class="contact">
+        <li><span>Ubicación</span>Valencia, España</li>
+        <li><span>Email</span><a href="mailto:aymanmouzakki17@gmail.com">aymanmouzakki17@gmail.com</a></li>
+        <li><span>Teléfono</span><a href="tel:+34674121613">+34 674 121 613</a></li>
+        <li><span>GitHub</span><a href="https://github.com/aymanmzkk">github.com/aymanmzkk</a></li>
+        <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/ayman-mouzakki-a1b63639b/">in/ayman-mouzakki</a></li>
+        <li><span>Portafolio</span><a href="https://aymanmzkk.github.io/Portafolio/">aymanmzkk.github.io/Portafolio</a></li>
       </ul>
-    </section>
 
-    <section class="habilidades">
-      <h3>Habilidades</h3>
+      <h2>Competencias técnicas</h2>
+      <div class="skill-group">
+        <strong>Backend</strong>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">API REST</span></div>
+      </div>
+      <div class="skill-group">
+        <strong>Frontend</strong>
+        <div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span></div>
+      </div>
+      <div class="skill-group">
+        <strong>Bases de datos</strong>
+        <div class="tags"><span class="tag">MySQL</span><span class="tag">SQL</span><span class="tag">SQLite</span><span class="tag">Supabase</span></div>
+      </div>
+      <div class="skill-group">
+        <strong>Herramientas</strong>
+        <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Vercel</span><span class="tag">VirtualBox</span><span class="tag">UML</span></div>
+      </div>
+
+      <h2>Idiomas</h2>
       <ul>
-        <li>capacidad de análisis</li>
-        <li>Comunicación asertiva</li>
+        <li class="lang">Árabe y darija <em>Nativo</em></li>
+        <li class="lang">Francés <em>C1 · IFCAD Bruselas</em></li>
+        <li class="lang">Inglés <em>C1 · no certificado</em></li>
+        <li class="lang">Español <em>B2 · Taronja Valencia</em></li>
+      </ul>
+
+      <h2>Competencias personales</h2>
+      <ul>
+        <li>Trabajo en equipo con Git</li>
         <li>Resolución de problemas</li>
-        <li>Trabajo en equipo</li>
-        <li>Adaptabilidad a entornos dinámicos y multiculturales</li>
+        <li>Aprendizaje autónomo</li>
+        <li>Entornos multiculturales</li>
       </ul>
-    </section>
+    </aside>
 
-    <section class="Competencias-tecnicas">
-      <h3>Competencias Técnicas</h3>
-      <ul>
-        <li>HTML/CSS</li>
-        <li>Python</li>
-        <li>Microsoft Office</li>
-        <li>Gestión básica de bases de datos MySQL y consultas SQL</li>
-      </ul>
-    </section>
+    <section class="main">
+      <header>
+        <img class="photo photo-mobile" src="foto.jpg" alt="" aria-hidden="true">
+        <h1>Ayman Mouzakki</h1>
+        <p class="role">Desarrollador web · Estudiante de 2º de DAM</p>
+        <p class="status">Busco prácticas de formación en empresa · Valencia</p>
+      </header>
 
-    <section class="experiencia">
-      <h3>Experiencia</h3>
-      <div class="job">
-        <h4>Repartidor</h4>
-        <span class="date">UBER Company | 2023 – 2024</span>
-        <p>Trabajé como repartidor en Uber Eats, realizando
-entregas eficientes y puntuales . Desarrollé habilidades
-de organización, gestión del tiempo y atención al
-cliente, utilizando herramientas digitales para optimizar
-rutas y garantizar la satisfacción del usuario.</p>
+      <h2>Perfil</h2>
+      <p class="profile">
+        Desarrollador web en Globearea y estudiante de 2º de Desarrollo de Aplicaciones Multiplataforma.
+        Desarrollo aplicaciones web completas con Python (Flask), PHP (Laravel) y MySQL: login de usuarios,
+        paneles de administración, pedidos y APIs. Me gusta llevar una idea hasta una aplicación que funcione
+        y trabajo a diario con Git. Hablo cinco idiomas y busco unas prácticas en las que aportar desde el primer día
+        y seguir creciendo dentro de un equipo de desarrollo.
+      </p>
+
+      <h2>Experiencia</h2>
+      <div class="item">
+        <div class="item-head">
+          <h3>Desarrollador web</h3>
+          <span class="date">abr. 2026 – actualidad</span>
+        </div>
+        <p class="where">Globearea · Inteligencia geoespacial · Valencia</p>
+        <ul>
+          <li>Desarrollo de la web corporativa y de la plataforma de clientes: acceso con login, API en PHP, base de datos MySQL y visualización de activos en mapa.</li>
+          <li>Chatbot de consulta para la gestión de flotas (Python + JavaScript), desarrollado en equipo.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <h3>Repartidor</h3>
+          <span class="date">2023 – 2024</span>
+        </div>
+        <p class="where">Uber Eats · Autónomo</p>
+        <ul>
+          <li>Organización de rutas y entregas puntuales con herramientas digitales; atención al cliente.</li>
+        </ul>
+      </div>
+
+      <h2>Proyectos</h2>
+      <div class="item">
+        <div class="item-head">
+          <h3><a href="https://github.com/aymanmzkk/KOOK">KOOK</a> · Kits de cocina con ingredientes pre-medidos</h3>
+        </div>
+        <p class="stack">Python · Flask · Flask-Login · MySQL · Jinja · JavaScript</p>
+        <ul>
+          <li>Aplicación web con catálogo de recetas con filtros, carrito, pedidos, registro y login con contraseñas cifradas.</li>
+          <li>Panel de administración con CRUD de recetas, usuarios y pedidos; interfaz en español e inglés.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <h3>Dietech · Dietas personalizadas <span class="badge">EN DESARROLLO</span></h3>
+        </div>
+        <p class="stack">PHP · Laravel · MySQL · Blade</p>
+        <ul>
+          <li>Calcula calorías y macronutrientes según edad, altura, peso, actividad y objetivo, y genera dietas y platos adaptados.</li>
+          <li>Pedidos diarios o semanales de platos preparados con envío a toda España.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <h3>Kelma &amp; Parola · App para aprender idiomas <span class="badge">EN DESARROLLO</span></h3>
+        </div>
+        <p class="stack">React · TypeScript · Supabase · Tailwind · PWA</p>
+        <ul>
+          <li>App instalable: una palabra en inglés al día que cada usuario traduce a su idioma; las respuestas se revelan cuando ambos responden.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <h3><a href="https://github.com/BryanGF-hg/WePlan">WePlan</a> · Plataforma de actividades <span class="badge">EN EQUIPO</span></h3>
+        </div>
+        <p class="stack">PHP · MySQL · HTML · CSS</p>
+        <ul>
+          <li>Proyecto de Entornos de Desarrollo (2 personas): buscar, crear y unirse a actividades por categoría, siguiendo todas las fases de desarrollo.</li>
+        </ul>
+      </div>
+
+      <h2>Formación</h2>
+      <div class="item">
+        <div class="item-head">
+          <h3>CFGS Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+          <span class="date">2025 – 2027</span>
+        </div>
+        <p class="where">CEAC FP · Valencia · Cursando 2º curso</p>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <h3>MIAGE · Informática aplicada a la gestión (1 curso)</h3>
+          <span class="date">2022 – 2023</span>
+        </div>
+        <p class="where">Universidad Internacional de Casablanca</p>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <h3>Bachillerato en Ciencias (Física y Química)</h3>
+          <span class="date">2021 – 2022</span>
+        </div>
+        <p class="where">Escuela Casahills · Casablanca</p>
       </div>
     </section>
 
-    <footer>
-      <p>© 2025 Ayman Mouzakki. All Rights Reserved.</p>
-    </footer>
-  </div>
+  </main>
+
 </body>
 </html>
